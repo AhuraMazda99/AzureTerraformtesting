@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 4.0.0"
+      version = "~> 3.0.0"
     }
   }
   required_version = ">= 0.14.9"
@@ -19,7 +19,7 @@ resource "azurerm_resource_group" "rg" {
 
 module "vnet-Main" {
   source  = "Azure/vnet/azurerm"
-  version = "4.0.0"
+  version = "3.0.0"
   # insert the 3 required variables here
   resource_group_name = azurerm_resource_group.rg
 
