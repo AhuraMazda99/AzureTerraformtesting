@@ -14,6 +14,6 @@ provider "azurerm" {
 # Create the resource group
 resource "azurerm_resource_group" "rg" {
   name     = "jizan-terraform"
-  location = "var.region"
+  location = var.region
 }
 
