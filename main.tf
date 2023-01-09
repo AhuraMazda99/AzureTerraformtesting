@@ -19,7 +19,7 @@ resource "azurerm_resource_group" "rg" {
 
 module "vnet-Main" {
   source  = "Azure/vnet/azurerm"
-  version = "4.0.0"
+  version = "~> 4.0.0"
   # insert the 3 required variables here
   resource_group_name = azurerm_resource_group.rg
 
