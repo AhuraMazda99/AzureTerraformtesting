@@ -17,3 +17,27 @@ resource "azurerm_resource_group" "rg" {
   location = var.region
 }
 
+module "vnet-Main" {
+  source  = "Azure/vnet/azurerm"
+  version = "4.0.0"
+  # insert the 3 required variables here
+  resource_group_name = azurerm_resource_group.rg
+
+  use_for_each = false
+
+  vnet_location = var.region
+
+address_space = var.ip_rang
+
+
+  subnet_names = [
+  "Apllication",
+  "Infrastructure",
+  ]
+
+  subnet_prefixes = [
+  var.subnet1,
+  var.subnet2
+  ]
+
+}
