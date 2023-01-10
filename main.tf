@@ -48,7 +48,6 @@ resource "azurerm_key_vault" "KY" {
   sku_name = "Standard"
 
   access_policy = [ {
-    application_id = data.azurerm_client_config.current.application_id
     certificate_permissions = [ "Get" ]
     key_permissions = [ "Get" ]
     object_id = data.azurerm_client_config.current.object_id
