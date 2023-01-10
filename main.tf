@@ -46,7 +46,7 @@ resource "azurerm_network_interface" "Netinterface" {
 
   ip_configuration {
     name = "vmtestnic"
-    subnet_id = module.network.vnet_subnets.Infra
+    subnet_id = module.network.subnet1.id
     private_ip_address_allocation = "Dynamic"
   }
 }
