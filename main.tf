@@ -20,23 +20,17 @@ resource "azurerm_resource_group" "rg" {
 }
 
 
-module "network" {
-  source  = "Azure/network/azurerm"
-  version = "5.0.0"
-  # insert the 2 required variables here
+resource "azurerm_virtual_network" "Vnetmain" {
+  name = "Vnetmain"
   resource_group_name = azurerm_resource_group.rg.name
-  use_for_each = false
-  subnet_names = [
-    "Application",
-    "Infra"
-  ]
-  subnet_prefixes = [
-    var.subnet1,
-    var.subnet2,
-  ]
-  address_space = var.ip_rang
-  resource_group_location = var.region
-  vnet_name = "Main_Vnet"
+  location = var.region
+  address_space = [var.ip_rang]
+subnet = [ {
+  address_prefix = var.
+  name = "value"
+} ]
+
+
 }
 
 resource "azurerm_network_interface" "Netinterface" {
@@ -46,7 +40,7 @@ resource "azurerm_network_interface" "Netinterface" {
 
   ip_configuration {
     name = "vmtestnic"
-    subnet_id = module.network.vnet_subnets.Application
+    subnet_id = 
     private_ip_address_allocation = "Dynamic"
   }
 }
