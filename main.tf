@@ -64,7 +64,9 @@ resource "azurerm_key_vault" "KY" {
   purge_protection_enabled = false
   sku_name = "standard"
   access_policy = [ {
-    application_id = data.azurerm_client_config.current.client_id
+     application_id = data.azurerm_client_config.current.client_id
+     tenant_id = data.azurerm_client_config.current.tenant_id
+     object_id = data.azurerm_client_config.current.object_id
     certificate_permissions = [ 
       "Get",
       "Create",
@@ -75,14 +77,14 @@ resource "azurerm_key_vault" "KY" {
     ]
     secret_permissions = [
        "Get",
-       "Create",
+       "List",
+       "Set",
     ]
     storage_permissions = [ 
       "Get",
-      "Create",
+      "List",
      ]
-    tenant_id = data.azurerm_client_config.current.tenant_id
-     object_id = data.azurerm_client_config.current.object_id
+   
   } ]
 }
 
