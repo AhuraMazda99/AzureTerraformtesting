@@ -23,5 +23,14 @@ module "network" {
   # insert the 2 required variables here
   resource_group_name = azurerm_resource_group.rg.name
   use_for_each = false
-
+  subnet_names = [
+    "Application",
+    "Infra"
+  ]
+  subnet_prefixes = [
+    var.subnet1,
+    var.subnet2
+  ]
+  address_space = var.ip_rang
+  resource_group_location = var.region
 }
