@@ -42,11 +42,11 @@ module "network" {
 resource "azurerm_network_interface" "Netinterface" {
   name = "network interface"
   location = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg
+  resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
     name = "vmtestnic"
-    subnet_id = module.network.vnet_subnets.Application.id
+    subnet_id = module.network.vnet_subnets.Infra
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -95,7 +95,7 @@ resource "azurerm_key_vault_secret" "admin_password" {
 resource "azurerm_windows_virtual_machine" "vm_test" {
   name = "vmtest"
   location = var.region
-  resource_group_name = azurerm_resource_group.rg
+  resource_group_name = azurerm_resource_group.rg.name
   size = "Standard_D2s_v3"
   network_interface_ids = [azurerm_network_interface.Netinterface.id]
   admin_username = "adminNT"
