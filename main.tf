@@ -40,14 +40,14 @@ module "network" {
 }
 
 resource "azurerm_key_vault" "KY" {
-  name = "Main_Keyvault"
+  name = "MainKeyvault"
   location = var.region
   resource_group_name = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
   tenant_id = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days = 7
   purge_protection_enabled = false
-  sku_name = "Standard"
+  sku_name = "standard"
 
   access_policy = [ {
     application_id = data.azurerm_client_config.current.client_id
