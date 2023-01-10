@@ -46,7 +46,7 @@ resource "azurerm_network_interface" "Netinterface" {
 
   ip_configuration {
     name = "vmtestnic"
-    subnet_id = module.network.Application.id
+    subnet_id = module.network.vnet_subnets.Application.id
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -97,7 +97,7 @@ resource "azurerm_windows_virtual_machine" "vm_test" {
   location = var.region
   resource_group_name = azurerm_resource_group.rg
   vm_size = "Standard_D2s_v3"
-  network_interface_ids = [azurerm_network_interface.main.id]
+  network_interface_ids = [azurerm_network_interface.Netinterface.id]
   admin_username = "adminNT"
   admin_password = azurerm_key_vault_secret.admin_password
 os_disk {
