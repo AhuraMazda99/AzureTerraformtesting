@@ -43,7 +43,7 @@ resource "azurerm_subnet" "sub2" {
   
 }
 resource "azurerm_network_interface" "Netinterface" {
-  name = "network interface"
+  name = "networkinterface"
   location = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
