@@ -21,3 +21,17 @@ description = "subnet range for network"
 type = string
 default = "10.50.2.0/24"
 }
+
+data "azurerm_client_config" "current" {
+  output "Client_id" {
+    value = data.azurerm_client_config.current.Client_id
+}
+output "Application_id" {
+    value = data.azurerm_client_config.current.Application_id
+}
+
+output "tenant_id" {
+    value = data.azurerm_client_config.current.tenant_id
+}
+  }
+  
