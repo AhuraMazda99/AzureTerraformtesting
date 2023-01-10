@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "4.0.0"
+      version = ">= 3.11, < 4.0"
     }
   }
   required_version = ">= 0.14.9"
@@ -24,4 +24,8 @@ module "vnet" {
   use_for_each = false 
   vnet_location = var.region
   resource_group_name = azurerm_resource_group.rg
+
+
+
+
 }
