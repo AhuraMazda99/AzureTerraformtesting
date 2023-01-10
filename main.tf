@@ -17,11 +17,3 @@ resource "azurerm_resource_group" "rg" {
   location = var.region
 }
 
-module "network" {
-  source  = "Azure/network/azurerm"
-  version = "5.0.0"
-  # insert the 2 required variables here
-  resource_group_name = azurerm_resource_group.rg.name
-  use_for_each = false
-
-}
