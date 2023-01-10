@@ -25,14 +25,23 @@ resource "azurerm_virtual_network" "Vnetmain" {
   resource_group_name = azurerm_resource_group.rg.name
   location = var.region
   address_space = [var.ip_rang]
-subnet = [ {
-  address_prefix = var.
-  name = "value"
-} ]
-
-
 }
 
+resource "azurerm_subnet" "sub1" {
+  name = "Application"
+  resource_group_name = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.Vnetmain.name
+  address_prefixes = var.subnet1
+  
+}
+
+resource "azurerm_subnet" "sub2" {
+  name = "Infra"
+  resource_group_name = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.Vnetmain.name
+  address_prefixes = var.subnet2
+  
+}
 resource "azurerm_network_interface" "Netinterface" {
   name = "network interface"
   location = azurerm_resource_group.rg.location
