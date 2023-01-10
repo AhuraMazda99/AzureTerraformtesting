@@ -39,6 +39,18 @@ module "network" {
   vnet_name = "Main_Vnet"
 }
 
+resource "azurerm_network_interface" "Netinterface" {
+  name = "network interface"
+  location = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg
+
+  ip_configuration {
+    name = "vmtestnic"
+    subnet_id = module.network.Application.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
 resource "azurerm_key_vault" "KY" {
   name = "Jizanmainkeyvault"
   location = var.region
@@ -87,7 +99,7 @@ resource "azurerm_windows_virtual_machine" "vm_test" {
   vm_size = "Standard_D2s_v3"
   network_interface_ids = [azurerm_network_interface.main.id]
   admin_username = "adminNT"
-  admin_password = azurerm_key_vault_key.admin_password
+  admin_password = azurerm_key_vault_secret.admin_password
 os_disk {
   caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
