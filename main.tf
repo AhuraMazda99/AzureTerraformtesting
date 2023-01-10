@@ -33,5 +33,5 @@ module "network" {
   ]
   address_space = var.ip_rang
   resource_group_location = var.region
-  vnet_name = "Main Vnet"
+  vnet_name = "Main_Vnet"
 }
