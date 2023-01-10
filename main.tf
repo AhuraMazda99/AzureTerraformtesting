@@ -17,6 +17,7 @@ resource "azurerm_resource_group" "rg" {
   location = var.region
 }
 
+
 module "network" {
   source  = "Azure/network/azurerm"
   version = "5.0.0"
@@ -35,3 +36,25 @@ module "network" {
   resource_group_location = var.region
   vnet_name = "Main_Vnet"
 }
+
+resource "azurerm_key_vault" "KY" {
+  name = "Main_Keyvault"
+  location = var.region
+  resource_group_name = azurerm_resource_group.rg.name
+  enabled_for_disk_encryption = true
+  tenant_id = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days = 7
+  purge_protection_enabled = false
+  sku_name = "Standard"
+
+  access_policy = [ {
+    application_id = data.azurerm_client_config.current.application_id
+    certificate_permissions = [ "Get" ]
+    key_permissions = [ "Get" ]
+    object_id = data.azurerm_client_config.current.object_id
+    secret_permissions = [ "Get" ]
+    storage_permissions = [ "Get" ]
+    tenant_id = data.azurerm_client_config.current.tenant_id
+  } ]
+}
+
