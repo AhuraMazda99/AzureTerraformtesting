@@ -96,7 +96,7 @@ resource "azurerm_windows_virtual_machine" "vm_test" {
   name = "vmtest"
   location = var.region
   resource_group_name = azurerm_resource_group.rg
-  vm_size = "Standard_D2s_v3"
+  size = "Standard_D2s_v3"
   network_interface_ids = [azurerm_network_interface.Netinterface.id]
   admin_username = "adminNT"
   admin_password = azurerm_key_vault_secret.admin_password
