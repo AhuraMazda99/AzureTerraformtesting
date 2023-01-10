@@ -32,7 +32,7 @@ module "network" {
   ]
   subnet_prefixes = [
     var.subnet1,
-    var.subnet2
+    var.subnet2,
   ]
   address_space = var.ip_rang
   resource_group_location = var.region
@@ -59,8 +59,8 @@ resource "azurerm_key_vault" "KY" {
   } ]
 }
 
-resource "azurerm_key_vault_key" "admin_password" {
-  key_vault_id = azurerm_key_vault.KY
+resource "azurerm_key_vault_key" "test" {
+  key_vault_id = azurerm_key_vault.KY.id
   key_type = "RSA"
   key_size = 2048
   name = "adminkey"
@@ -72,6 +72,12 @@ resource "azurerm_key_vault_key" "admin_password" {
     "verify",
     "wrapKey",
    ]
+}
+
+resource "azurerm_key_vault_secret" "admin_password" {
+  key_vault_id = azurerm_key_vault.KY.id
+  value = "dragensliketodanceinthesky123!"
+  name = "adminpassword"
 }
 
 resource "azurerm_windows_virtual_machine" "vm_test" {
