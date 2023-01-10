@@ -48,7 +48,6 @@ resource "azurerm_key_vault" "KY" {
   soft_delete_retention_days = 7
   purge_protection_enabled = false
   sku_name = "standard"
-
   access_policy = [ {
     application_id = data.azurerm_client_config.current.client_id
     certificate_permissions = [ "Get" ]
@@ -58,5 +57,43 @@ resource "azurerm_key_vault" "KY" {
     storage_permissions = [ "Get" ]
     tenant_id = data.azurerm_client_config.current.tenant_id
   } ]
+}
+
+resource "azurerm_key_vault_key" "admin_password" {
+  key_vault_id = azurerm_key_vault.KY
+  key_type = "RSA"
+  key_size = 2048
+  name = "adminkey"
+  key_opts = [ 
+    "decrypt",
+    "encrypt",
+    "sign",
+    "unwrapKey",
+    "verify",
+    "wrapKey",
+   ]
+}
+
+resource "azurerm_windows_virtual_machine" "vm_test" {
+  name = "vmtest"
+  location = var.region
+  resource_group_name = azurerm_resource_group.rg
+  vm_size = "Standard_D2s_v3"
+  network_interface_ids = [azurerm_network_interface.main.id]
+  admin_username = "adminNT"
+  admin_password = azurerm_key_vault_key.admin_password
+os_disk {
+  caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+}
+
+source_image_reference {
+  publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+}
+
+
 }
 
