@@ -49,7 +49,7 @@ resource "azurerm_network_interface" "Netinterface" {
 
   ip_configuration {
     name = "vmtestnic"
-    subnet_id = 
+    subnet_id = azurerm_subnet.sub1.id
     private_ip_address_allocation = "Dynamic"
   }
 }
