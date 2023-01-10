@@ -65,10 +65,22 @@ resource "azurerm_key_vault" "KY" {
   sku_name = "standard"
   access_policy = [ {
     application_id = data.azurerm_client_config.current.client_id
-    certificate_permissions = [ "Get","list","Create","update","Delete", ]
-    key_permissions = [ "Get","list","Create","update","Delete", ]
-    secret_permissions = [ "Get","list","Create","update","Delete", ]
-    storage_permissions = [ "Get","list","Create","update","Delete", ]
+    certificate_permissions = [ 
+      "Get",
+      "Create",
+    ]
+    key_permissions = [ 
+      "Get",
+      "Create",
+    ]
+    secret_permissions = [
+       "Get",
+       "Create",
+    ]
+    storage_permissions = [ 
+      "Get",
+      "Create",
+     ]
     tenant_id = data.azurerm_client_config.current.tenant_id
      object_id = data.azurerm_client_config.current.object_id
   } ]
