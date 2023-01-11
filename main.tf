@@ -67,7 +67,7 @@ resource "azurerm_key_vault" "KY" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
     key_permissions = [
-      "Get",
+      "Get", "List", "Create",
     ]
     secret_permissions = [
       "Get", "Backup", "Delete", "List", "Purge", "Recover", "Restore", "Set",
@@ -82,7 +82,7 @@ resource "azurerm_key_vault_key" "test" {
   key_vault_id = azurerm_key_vault.KY.id
   key_type = "RSA"
   key_size = 2048
-  name = "adminkey"
+  name = "test"
   key_opts = [ 
     "decrypt",
     "encrypt",
