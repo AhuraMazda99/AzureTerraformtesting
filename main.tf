@@ -57,6 +57,7 @@ resource "azurerm_network_security_group" "nsg" {
   name = "NSG-Main"
   resource_group_name = azurerm_resource_group.rg.name
   location = var.region
+  
 security_rule {
     name                       = "RDP"
     priority                   = 100
@@ -68,6 +69,10 @@ security_rule {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+}
+resource "azurerm_subnet_network_security_group_association" "application-NSG-main" {
+  subnet_id = azurerm_subnet.sub1.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
 resource "azurerm_key_vault" "KY" {
