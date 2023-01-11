@@ -63,29 +63,6 @@ resource "azurerm_key_vault" "KY" {
   soft_delete_retention_days = 7
   purge_protection_enabled = false
   sku_name = "standard"
-  access_policy = [ {
-     #application_id = data.azurerm_client_config.current.client_id
-     tenant_id = data.azurerm_client_config.current.tenant_id
-     object_id = data.azurerm_client_config.current.object_id
-    certificate_permissions = [ 
-      "Get",
-      "Create",
-    ]
-    key_permissions = [ 
-      "Get",
-      "Create",
-    ]
-    secret_permissions = [
-       "Get",
-       "List",
-       "Set",
-    ]
-    storage_permissions = [ 
-      "Get",
-      "List",
-     ]
-   
-  } ]
 }
 
 resource "azurerm_key_vault_key" "test" {
