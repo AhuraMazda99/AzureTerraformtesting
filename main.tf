@@ -53,6 +53,21 @@ resource "azurerm_network_interface" "Netinterface" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+resource "azurerm_network_security_group" "nsg" {
+  name = "NSG-Main"
+  resource_group_name = azurerm_resource_group.rg.name
+  location = var.region
+  security_rule = [ {
+    access = "Allow"
+    description = "RDP"
+    destination_address_prefix = "Any"
+    destination_port_range = "3389"
+    direction = "value"
+    name = "rdp-rule"
+    priority = 50
+    protocol = "TCP"
+  } ]
+}
 
 resource "azurerm_key_vault" "KY" {
   name = "Jizanmainkeyvault"
@@ -67,7 +82,7 @@ resource "azurerm_key_vault" "KY" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
     key_permissions = [
-      "Get", "List", "Create",
+      "Get", "List", "Create", "Delete",
     ]
     secret_permissions = [
       "Get", "Backup", "Delete", "List", "Purge", "Recover", "Restore", "Set",
