@@ -54,6 +54,11 @@ resource "azurerm_network_interface" "Netinterface" {
     public_ip_address_id = "Dynamic"
   }
 }
+resource "azurerm_public_ip" "public-ip-vm" {
+  allocation_method = "Static"
+  resource_group_name = azurerm_resource_group.rg.name
+  location = var.region
+}
 resource "azurerm_network_security_group" "nsg" {
   name = "NSG-Main"
   resource_group_name = azurerm_resource_group.rg.name
