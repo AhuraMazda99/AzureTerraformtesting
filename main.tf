@@ -51,7 +51,7 @@ resource "azurerm_network_interface" "Netinterface" {
     name = "vmtestnic"
     subnet_id = azurerm_subnet.sub1.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.public-ip-vm.id
   }
 }
 resource "azurerm_public_ip" "public-ip-vm" {
