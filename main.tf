@@ -57,16 +57,17 @@ resource "azurerm_network_security_group" "nsg" {
   name = "NSG-Main"
   resource_group_name = azurerm_resource_group.rg.name
   location = var.region
-  security_rule = [ {
-    access = "Allow"
-    description = "RDP"
-    destination_address_prefix = "Any"
-    destination_port_range = "3389"
-    direction = "value"
-    name = "rdp-rule"
-    priority = 50
-    protocol = "TCP"
-  } ]
+security_rule {
+    name                       = "RDP"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
 resource "azurerm_key_vault" "KY" {
