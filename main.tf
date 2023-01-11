@@ -51,6 +51,7 @@ resource "azurerm_network_interface" "Netinterface" {
     name = "vmtestnic"
     subnet_id = azurerm_subnet.sub1.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = "Dynamic"
   }
 }
 resource "azurerm_network_security_group" "nsg" {
@@ -134,11 +135,11 @@ resource "azurerm_windows_virtual_machine" "vm_test" {
   network_interface_ids = [azurerm_network_interface.Netinterface.id]
   admin_username = "adminNT"
   admin_password = azurerm_key_vault_secret.admin_password.value
+  
 os_disk {
   caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
 }
-
 source_image_reference {
   publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
