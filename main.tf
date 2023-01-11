@@ -77,7 +77,7 @@ resource "azurerm_subnet_network_security_group_association" "application-NSG-ma
 }
 
 resource "azurerm_network_interface_security_group_association" "Vnet-Main-NSG" {
-  network_interface_id = azurerm_virtual_network.Vnetmain.id
+  network_interface_id = azurerm_network_interface.Netinterface.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
