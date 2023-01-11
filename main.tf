@@ -73,6 +73,12 @@ security_rule {
 resource "azurerm_subnet_network_security_group_association" "application-NSG-main" {
   subnet_id = azurerm_subnet.sub1.id
   network_security_group_id = azurerm_network_security_group.nsg.id
+  
+}
+
+resource "azurerm_network_interface_security_group_association" "Vnet-Main-NSG" {
+  network_interface_id = azurerm_virtual_network.Vnetmain.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
 resource "azurerm_key_vault" "KY" {
