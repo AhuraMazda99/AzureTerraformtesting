@@ -88,28 +88,12 @@ resource "azurerm_network_interface_security_group_association" "Vnet-Main-NSG" 
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
-resource "azurerm_key_vault" "KY" {
-  name = "Jizanmainkeyvault"
-  location = var.region
-  resource_group_name = azurerm_resource_group.rg.name
-  enabled_for_disk_encryption = true
-  tenant_id = data.azurerm_client_config.current.tenant_id
-  soft_delete_retention_days = 7
-  purge_protection_enabled = false
-  sku_name = "standard"
-    access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
-    key_permissions = [
-      "Get", "List", "Create", "Delete",
-    ]
-    secret_permissions = [
-      "Get", "Backup", "Delete", "List", "Purge", "Recover", "Restore", "Set",
-    ]
-    storage_permissions = [
-      "Get",
-    ]
-  }
+module "Key_vault" {
+  source = "C:\Users\benjamin\.vscode\githubben\azure\Modules\Key-Vault\Main.tf"
+  Key_vault_name = "Jizan-keyvaultname"
+  Sku = "Standard"
+  tenent_id = data.azurerm_client_config.tenant_id
+  object_id = data.azurerm_client_config.object_id
 }
 
 resource "azurerm_key_vault_key" "test" {
