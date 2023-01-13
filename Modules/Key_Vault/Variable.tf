@@ -18,3 +18,8 @@ variable "rg" {
   description = "Respurce group"
   type = string
 }
+
+variable "location" {
+  description = "Location"
+  type = string
+}
