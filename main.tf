@@ -94,7 +94,7 @@ module "Secret_adminpassword" {
   source = "./Modules/Key_Vault/Secret"
   name = "adminpassword"
   value = "Kittenflyinthesky123!"
-  key_vault_id = output.key_vault_id
+  key_vault_id = module.key_vault_id
 }
 
 
