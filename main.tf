@@ -98,12 +98,13 @@ module "Key_vault" {
   location = var.region
 }
 
-
-resource "azurerm_key_vault_secret" "admin_password" {
-  key_vault_id = module.Key_vault.ID
-  value = "dragensliketodanceinthesky123!"
+module "Secret_adminpassword" {
+  source = "./Modules/Key_Vault/Secret"
   name = "adminpassword"
+  value = "Kittenflyinthesky123!"
+  key_vault_id = module.Key_vault.ID
 }
+
 
 resource "azurerm_windows_virtual_machine" "vm_test" {
   name = "vmtest"
@@ -112,7 +113,7 @@ resource "azurerm_windows_virtual_machine" "vm_test" {
   size = "Standard_D2s_v3"
   network_interface_ids = [azurerm_network_interface.Netinterface.id]
   admin_username = "adminNT"
-  admin_password = azurerm_key_vault_secret.admin_password.value
+  admin_password = module.Secret_adminpassword.ID
   
 os_disk {
   caching              = "ReadWrite"
