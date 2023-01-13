@@ -10,15 +10,19 @@ terraform {
 provider "azurerm" {
   features {}
 }
+#Data inputs
 data "azurerm_client_config" "current" {
 }
 
-# Create the resource group
+
+
+# Resource Groups
 resource "azurerm_resource_group" "rg" {
   name     = "jizan-terraform"
   location = var.region
 }
 
+#Networking
 
 resource "azurerm_virtual_network" "Vnetmain" {
   name = "Vnetmain"
@@ -90,14 +94,27 @@ resource "azurerm_network_interface_security_group_association" "Vnet-Main-NSG" 
 
 
 
+#Key Vaults
+module "Key_vault" {
+  source = "./Modules/Key_Vault"
+  Key_vault_name = "Jizan-keyvaultname"
+  sku = "standard"
+  tenent_id = data.azurerm_client_config.current.tenant_id
+  object_id = data.azurerm_client_config.current.object_id
+  rg = output.resource_group_name
+  location = var.region
+}
+
 module "Secret_adminpassword" {
   source = "./Modules/Key_Vault/Secret"
   name = "adminpassword"
   value = "Kittenflyinthesky123!"
-  key_vault_id = module.key_vault.ID
+  key_vault_id = module.Key_vault.ID
 }
 
 
+
+#VM
 resource "azurerm_windows_virtual_machine" "vm_test" {
   name = "vmtest"
   location = var.region
