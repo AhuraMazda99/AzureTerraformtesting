@@ -91,7 +91,7 @@ resource "azurerm_network_interface_security_group_association" "Vnet-Main-NSG" 
 module "Key_vault" {
   source = "./Modules/Key_Vault"
   Key_vault_name = "Jizan-keyvaultname"
-  Sku = "Standard"
+  sku = "Standard"
   tenent_id = data.azurerm_client_config.tenant_id
   object_id = data.azurerm_client_config.object_id
 }
