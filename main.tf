@@ -89,7 +89,7 @@ resource "azurerm_network_interface_security_group_association" "Vnet-Main-NSG" 
 }
 
 module "Key_vault" {
-  source = "github.com/azure/Modules/KeyVault"
+  source = "git::https://https://github.com/AhuraMazda99/azure/tree/main/Modules/Key-Vault.git"
   Key_vault_name = "Jizan-keyvaultname"
   Sku = "Standard"
   tenent_id = data.azurerm_client_config.tenant_id
