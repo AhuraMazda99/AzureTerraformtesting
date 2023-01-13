@@ -1,6 +1,6 @@
 resource "azurerm_key_vault" "KY" {
   name = var.Key_vault_name
-  location = var.region
+  location = var.location
   resource_group_name = var.rg
   enabled_for_disk_encryption = true
   tenant_id = var.tenent_id
