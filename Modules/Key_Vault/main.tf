@@ -1,9 +1,9 @@
 resource "azurerm_key_vault" "KY" {
   name = var.Key_vault_name
   location = var.region
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = var.rg
   enabled_for_disk_encryption = true
-  tenant_id = data.azurerm_client_config.current.tenant_id
+  tenant_id = var.tenent_id
   soft_delete_retention_days = 7
   purge_protection_enabled = false
   sku_name = var.sku

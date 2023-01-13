@@ -14,3 +14,7 @@ variable "object_id" {
   description = "Object id"
   type = string
 }
+variable "rg" {
+  description = "Respurce group"
+  type = string
+}
