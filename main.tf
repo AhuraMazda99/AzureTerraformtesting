@@ -96,23 +96,9 @@ module "Key_vault" {
   object_id = data.azurerm_client_config.object_id
 }
 
-resource "azurerm_key_vault_key" "test" {
-  key_vault_id = azurerm_key_vault.KY.id
-  key_type = "RSA"
-  key_size = 2048
-  name = "test"
-  key_opts = [ 
-    "decrypt",
-    "encrypt",
-    "sign",
-    "unwrapKey",
-    "verify",
-    "wrapKey",
-   ]
-}
 
 resource "azurerm_key_vault_secret" "admin_password" {
-  key_vault_id = azurerm_key_vault.KY.id
+  key_vault_id = module.Key_vault.id
   value = "dragensliketodanceinthesky123!"
   name = "adminpassword"
 }
