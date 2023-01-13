@@ -92,13 +92,13 @@ module "Key_vault" {
   source = "./Modules/Key_Vault"
   Key_vault_name = "Jizan-keyvaultname"
   sku = "Standard"
-  tenent_id = data.azurerm_client_config.tenant_id
-  object_id = data.azurerm_client_config.object_id
+  tenent_id = data.azurerm_client_config.current.tenant_id
+  object_id = data.azurerm_client_config.current.object_id
 }
 
 
 resource "azurerm_key_vault_secret" "admin_password" {
-  key_vault_id = module.Key_vault.id
+  key_vault_id = module.Key_vault.ID
   value = "dragensliketodanceinthesky123!"
   name = "adminpassword"
 }
