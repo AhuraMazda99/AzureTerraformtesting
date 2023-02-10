@@ -10,9 +10,39 @@ terraform {
 provider "azurerm" {
   features {}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Data inputs
 data "azurerm_client_config" "current" {
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -22,8 +52,23 @@ resource "azurerm_resource_group" "rg" {
   location = var.region
 }
 
-#Networking
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Networking
 resource "azurerm_virtual_network" "Vnetmain" {
   name = "Vnetmain"
   resource_group_name = azurerm_resource_group.rg.name
@@ -94,6 +139,18 @@ resource "azurerm_network_interface_security_group_association" "Vnet-Main-NSG" 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 #Key Vaults
 module "Key_vault" {
   source = "./Modules/Key_Vault"
@@ -111,6 +168,20 @@ module "Secret_adminpassword" {
   value = "Kittenflyinthesky123!"
   key_vault_id = module.Key_vault.ID
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
