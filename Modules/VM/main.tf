@@ -5,7 +5,7 @@ resource "azurerm_windows_virtual_machine" "vm_test_Windows_2016" {
   size = "Standard_D2s_v3"
   network_interface_ids = var.network_interface_id
   admin_username = var.admin_username
-  admin_password = module.Secret_adminpassword.ID
+  admin_password = var.admin_password
   
 os_disk {
   caching              = "ReadWrite"

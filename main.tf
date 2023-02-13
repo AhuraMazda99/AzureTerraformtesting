@@ -192,6 +192,7 @@ module "vm_test_Windows_2016" {
   resource_group_name = azurerm_resource_group.rg.name
   admin_username = "adminNT"
   network_interface_id = azurerm_network_interface.Netinterface.id
+  admin_password = module.Secret_adminpassword
 }
 
 
