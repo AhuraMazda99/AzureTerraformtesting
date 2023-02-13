@@ -8,7 +8,7 @@ variable "admin_username" {
 }
 variable "network_interface_id" {
   description = "network interface id"
-  type = string
+  type = list
 }
 variable "resource_group_name" {
   description = "Resource group name"
