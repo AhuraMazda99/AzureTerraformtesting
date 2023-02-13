@@ -20,3 +20,7 @@ variable "admin_password" {
   type = string
 }
 
+variable "region" {
+  description = "region"
+  type = string
+}
